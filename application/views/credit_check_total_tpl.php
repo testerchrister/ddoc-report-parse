@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <section class="masthead d-flex text-white">
+	<nav><a href="<?=base_url()?>" class="btn btn-secondary"><< Back</a></nav>
 	<div class="container text-center jumbotron">
 		<h1>Credit Check Total Report Parser</h1>
 		<div class="col-md-6 offset-md-3">

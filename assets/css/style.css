@@ -1,0 +1,19 @@
+.report-type-card{
+	max-width: 20rem;
+	float: none !important;
+	margin: 1.2rem;
+	min-height: 15rem; 
+	display: inline-block;
+}
+.card-header h3 {
+	color: #fff;
+}
+.card-body p{
+	min-height: 5rem;
+}
+.type-container{
+	text-align: center;
+}
+.masthead h1 {
+    font-size: 4.5rem;
+}

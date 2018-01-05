@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <section class="masthead d-flex text-white">
+	<nav><a href="<?=base_url()?>" class="btn btn-secondary"><< Back</a></nav>
 	<div class="container text-center jumbotron">
 		<h1>Identity IQ Report Parser</h1>
 		<div class="col-md-6 offset-md-3">
@@ -16,6 +17,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<button class="btn btn-success btn-xl js-scroll-trigger">Submit</button>
 			</fieldset>
 		</form>
+		<div class="progress">
+  			<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
 		</div>
 		<div>
 			<?php

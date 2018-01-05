@@ -14,8 +14,14 @@ class Credit_check_total
 
 	public function __construct()
 	{
-		Config::set('pdftohtml.bin', 'C:/poppler-0.51/bin/pdftohtml.exe');
-		Config::set('pdfinfo.bin', 'C:/poppler-0.51/bin/pdfinfo.exe');
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+			Config::set('pdftohtml.bin', 'C:/poppler-0.51/bin/pdftohtml.exe');
+			Config::set('pdfinfo.bin', 'C:/poppler-0.51/bin/pdfinfo.exe');
+		} else {
+			\Gufy\PdfToHtml\Config::set('pdftohtml.bin', '/usr/bin/pdftohtml');
+			\Gufy\PdfToHtml\Config::set('pdfinfo.bin', '/usr/bin/pdfinfo');
+		}
+
 		$this->total_pages = 0;
 		$this->pase_report_info = array();
 		$this->info_type = array();
@@ -112,7 +118,7 @@ class Credit_check_total
 							$report_date = date('Y-m-d');
 						}
 						try{
-							$basic_info['report_date'] = date("Y-m-d", strtotime(trim($report_date)));
+							$basic_info['report_date'] = date("Y-m-d", strtotime($report_date));
 						} catch(Exception $e) {
 							log_message('error', "Failed to convert report date. " . $e->getMessage());
 						}						
@@ -704,7 +710,7 @@ class Credit_check_total
 
 			if(is_array($current_past_dues) && count($current_past_dues)) {
 				$full_current_past_dues = array_merge($full_current_past_dues, $current_past_dues);
-				$this->logResults($full_current_past_dues);
+				//$this->logResults($full_current_past_dues);
 			}
 		}
 		return $full_current_past_dues;

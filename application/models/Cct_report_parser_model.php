@@ -5,8 +5,15 @@ class Cct_report_parser_model extends CI_Model
 {
 	public function saveBasicInfo($report_id, $basic_info)
 	{
-		$this->db->where('id', $report_id);
-		$this->db->update('report_documents', $basic_info);
+		try{
+			$basic_info["status"] = "Y";
+			$this->db->where('id', $report_id);
+			$this->db->update('report_documents', $basic_info);	
+		} catch(Exception $e) {
+			log_message('error', $e->getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	/**

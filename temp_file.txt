@@ -1,0 +1,884 @@
+Array
+(
+    [0] => Array
+        (
+            [title] => 1ST-CITIZENS BNK & TRU 
+            [address] => 8002354636  4000 W BROWN DEER RD MILWAUKEE, WI 53209  
+            [experian] => Array
+                (
+                    [account_name] => 1ST-CITIZENS BNK & TRU
+                    [account] => 882920XXXXXXXXX
+                    [account_type] => All Banks - non specific
+                    [balance] => $0.00
+                    [past_due] => $0.00
+                    [date_opened] => 6/1/2015
+                    [account_satus] => Closed
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid satisfactorily
+                    [limit] => $0.00
+                    [terms] => 60 Months
+                )
+
+        )
+
+    [1] => Array
+        (
+            [title] => BARCLAYS BANK DELAWARE 
+            [address] => 8663705931  PO BOX 8803 WILMINGTON, DE 19899  
+            [experian] => Array
+                (
+                    [account_name] => BARCLAYS BANK DELAWARE
+                    [account] => 000278XXXXXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $12,359.00
+                    [past_due] => $0.00
+                    [date_opened] => 11/1/2016
+                    [account_satus] => Open
+                    [mo_payment] => $368.00
+                    [payment_status] => Current
+                    [limit] => $1,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [2] => Array
+        (
+            [title] => BARCLAYS BANK DELAWARE 
+            [address] => 8663705931  PO BOX 8803 WILMINGTON, DE 19899  
+            [experian] => Array
+                (
+                    [account_name] => BARCLAYS BANK DELAWARE
+                    [account] => 000263XXXXXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $5,306.00
+                    [past_due] => $0.00
+                    [date_opened] => 3/1/2016
+                    [account_satus] => Open
+                    [mo_payment] => $9.00
+                    [payment_status] => Current
+                    [limit] => $20,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [3] => Array
+        (
+            [title] => CAPONE/CABELAS 
+            [address] => 8005527963  4800 NW 1ST ST STE 300 LINCOLN, NE 68521  
+            [experian] => Array
+                (
+                    [account_name] => CAPONE/CABELAS
+                    [account] => 430023XXXXXXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $5,868.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/1/2014
+                    [account_satus] => Open
+                    [mo_payment] => $34.00
+                    [payment_status] => Current
+                    [limit] => $15,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [4] => Array
+        (
+            [title] => CAPONE/CABELAS 
+            [address] => 8005527963  4800 NW 1ST ST STE 300 LINCOLN, NE 68521  
+            [experian] => Array
+                (
+                    [account_name] => CAPONE/CABELAS
+                    [account] => 430023XXXXXXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $5,985.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/1/2001
+                    [account_satus] => Open
+                    [mo_payment] => $25.00
+                    [payment_status] => Current
+                    [limit] => $22,500.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [5] => Array
+        (
+            [title] => CASTLE CREDIT CO HOLDI 
+            [address] => 8008379700  8430 W BRYN MAWR AVE CHICAGO, IL 60631  
+            [experian] => Array
+                (
+                    [account_name] => CASTLE CREDIT CO HOLDI
+                    [account] => 1XXXX
+                    [account_type] => Finance Companies - non specific
+                    [balance] => $0.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/1/2016
+                    [account_satus] => Open
+                    [mo_payment] => $112.00
+                    [payment_status] => Current
+                    [limit] => $0.00
+                    [terms] => 36 Months
+                )
+
+        )
+
+    [6] => Array
+        (
+            [title] => DELTA COMMUNITY CREDIT 
+            [address] => 4047154725  1025 VIRGINIA AVE ATLANTA, GA 30354  
+            [experian] => Array
+                (
+                    [account_name] => DELTA COMMUNITY CREDIT
+                    [account] => 115594XXXXXXX
+                    [account_type] => Credit Unions
+                    [balance] => $0.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/1/2015
+                    [account_satus] => Open
+                    [mo_payment] => $262.00
+                    [payment_status] => Current
+                    [limit] => $0.00
+                    [terms] => 60 Months
+                )
+
+        )
+
+    [7] => Array
+        (
+            [title] => DELTA COMMUNITY CREDIT 
+            [address] => 4047154725  1025 VIRGINIA AVE ATLANTA, GA 30354  
+            [experian] => Array
+                (
+                    [account_name] => DELTA COMMUNITY CREDIT
+                    [account] => 115594XXXXXXX
+                    [account_type] => Credit Unions
+                    [balance] => $764.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/1/2015
+                    [account_satus] => Open
+                    [mo_payment] => $25.00
+                    [payment_status] => Current
+                    [limit] => $1,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [8] => Array
+        (
+            [title] => DISCOVER FIN SVCS LLC 
+            [address] => 8003472683  PO BOX 15316 WILMINGTON, DE 19850  
+            [experian] => Array
+                (
+                    [account_name] => DISCOVER FIN SVCS LLC
+                    [account] => 601100XXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $9,891.00
+                    [past_due] => $0.00
+                    [date_opened] => 1/1/1994
+                    [account_satus] => Closed
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid satisfactorily
+                    [limit] => $14,400.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [9] => Array
+        (
+            [title] => DISCOVER FIN SVCS LLC 
+            [address] => 8003472683  PO BOX 15316 WILMINGTON, DE 19850  
+            [experian] => Array
+                (
+                    [account_name] => DISCOVER FIN SVCS LLC
+                    [account] => 601120XXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $329.00
+                    [past_due] => $0.00
+                    [date_opened] => 5/1/2016
+                    [account_satus] => Open
+                    [mo_payment] => $35.00
+                    [payment_status] => Current
+                    [limit] => $35,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [10] => Array
+        (
+            [title] => DISCOVER FIN SVCS LLC 
+            [address] => 8003472683  PO BOX 15316 WILMINGTON, DE 19850  
+            [experian] => Array
+                (
+                    [account_name] => DISCOVER FIN SVCS LLC
+                    [account] => 601129XXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $12,357.00
+                    [past_due] => $0.00
+                    [date_opened] => 6/1/2003
+                    [account_satus] => Open
+                    [mo_payment] => $35.00
+                    [payment_status] => Current
+                    [limit] => $15,500.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [11] => Array
+        (
+            [title] => DISCOVER FIN SVCS LLC 
+            [address] => 8003472683  PO BOX 15316 WILMINGTON, DE 19850  
+            [experian] => Array
+                (
+                    [account_name] => DISCOVER FIN SVCS LLC
+                    [account] => 601149XXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $8,644.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/1/1999
+                    [account_satus] => Open
+                    [mo_payment] => $35.00
+                    [payment_status] => Current
+                    [limit] => $11,200.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [12] => Array
+        (
+            [title] => PENTAGON FEDERAL CR UN 
+            [address] => 7038381000  PO BOX 1432 ALEXANDRIA, VA 22313  
+            [experian] => Array
+                (
+                    [account_name] => PENTAGON FEDERAL CR UN
+                    [account] => 430679XXXXXX
+                    [account_type] => Credit Unions
+                    [balance] => $5,453.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/1/2016
+                    [account_satus] => Open
+                    [mo_payment] => $109.00
+                    [payment_status] => Current
+                    [limit] => $5,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [13] => Array
+        (
+            [title] => SYNCB/MRVL 
+            [address] => 8662430226  PO BOX 965022 ORLANDO, FL 32896  
+            [experian] => Array
+                (
+                    [account_name] => SYNCB/MRVL
+                    [account] => 524362XXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $2,098.00
+                    [past_due] => $0.00
+                    [date_opened] => 8/1/2017
+                    [account_satus] => Open
+                    [mo_payment] => $83.00
+                    [payment_status] => Current
+                    [limit] => $2,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [14] => Array
+        (
+            [title] => SYNCB/TJX COS DC 
+            [address] => 8009266299  PO BOX 965005 ORLANDO, FL 32896  
+            [experian] => Array
+                (
+                    [account_name] => SYNCB/TJX COS DC
+                    [account] => 524366XXXXXX
+                    [account_type] => Bank Credit Cards
+                    [balance] => $928.00
+                    [past_due] => $0.00
+                    [date_opened] => 1/1/2017
+                    [account_satus] => Open
+                    [mo_payment] => $61.00
+                    [payment_status] => Current
+                    [limit] => $1,000.00
+                    [terms] => Revolving
+                )
+
+        )
+
+    [15] => Array
+        (
+            [title] => US BANK HOME MORTGAGE 
+            [address] => BYMAILONLY  4801 FREDERICA ST OWENSBORO, KY 42301  
+            [experian] => Array
+                (
+                    [account_name] => US BANK HOME MORTGAGE
+                    [account] => 515990XXXXXXX
+                    [account_type] => Bank - Mortgage Department
+                    [balance] => $0.00
+                    [past_due] => $0.00
+                    [date_opened] => 7/1/2016
+                    [account_satus] => Open
+                    [mo_payment] => $866.00
+                    [payment_status] => Current
+                    [limit] => $0.00
+                    [terms] => 360 Months
+                )
+
+        )
+
+    [16] => Array
+        (
+            [title] => BARCLAYS BANK DELAWA 
+            [equifax] => Array
+                (
+                    [account_name] => BARCLAYS BANK DELAWA
+                    [account] => 278129XX
+                    [account_type] => All Banks
+                    [balance] => $12,359.00
+                    [past_due] => $0.00
+                    [date_opened] => 11/30/2016
+                    [account_satus] => Open
+                    [mo_payment] => $368.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $1,000.00
+                    [terms] => M
+                )
+
+        )
+
+    [17] => Array
+        (
+            [title] => CASTLE CREDIT CO HOL 
+            [equifax] => Array
+                (
+                    [account_name] => CASTLE CREDIT CO HOL
+                    [account] => 1XXXX
+                    [account_type] => Miscellaneous
+                    [balance] => $2,949.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/13/2016
+                    [account_satus] => Open
+                    [mo_payment] => $112.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $0.00
+                    [terms] => M 36M
+                )
+
+        )
+
+    [18] => Array
+        (
+            [title] => DELTA COMMUNITY CRED 
+            [address] => 4047154725  3250 RIVERWOOD PARKWAY ATLANTA, GA 30339  
+            [equifax] => Array
+                (
+                    [account_name] => DELTA COMMUNITY CRED
+                    [account] => 115594XXXXXXX
+                    [account_type] => Credit Unions
+                    [balance] => $764.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/2/2015
+                    [account_satus] => Open
+                    [mo_payment] => $25.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $1,000.00
+                    [terms] => M
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => DELTA CCU
+                    [account] => 115594XXXXXXX
+                    [account_type] => Finance other than personal
+                    [balance] => $13,791.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/2/2015
+                    [account_satus] => Open
+                    [mo_payment] => $262.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $0.00
+                    [terms] => 060 Months
+                )
+
+        )
+
+    [19] => Array
+        (
+            [title] => DELTA COMMUNITY CRED 
+            [address] => 4047154725  3250 RIVERWOOD PARKWAY ATLANTA, GA 30339  
+            [equifax] => Array
+                (
+                    [account_name] => DELTA COMMUNITY CRED
+                    [account] => 115594XXXXXXX
+                    [account_type] => Credit Unions
+                    [balance] => $13,791.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/2/2015
+                    [account_satus] => Open
+                    [mo_payment] => $262.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $0.00
+                    [terms] => M 60M
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => DELTA CCU
+                    [account] => 115594XXX
+                    [account_type] => Finance other than personal
+                    [balance] => $764.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/2/2015
+                    [account_satus] => Open
+                    [mo_payment] => $25.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $1,000.00
+                    [terms] => Minimum
+                )
+
+        )
+
+    [20] => Array
+        (
+            [title] => DISCOVER BANK  
+            [address] => 8003472683  PO BOX15316 ATT:CMS/PROD DEVELOP WILMINGTON, DE 19850-5316 
+            [equifax] => Array
+                (
+                    [account_name] => DISCOVER BANK
+                    [account] => 601100XXXXXX
+                    [account_type] => All Banks
+                    [balance] => $9,891.00
+                    [past_due] => $0.00
+                    [date_opened] => 1/31/1994
+                    [account_satus] => Closed
+                    [mo_payment] => $0.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $14,400.00
+                    [terms] => M
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => DISCOVERBANK
+                    [account] => 601100XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $9,891.00
+                    [past_due] => $0.00
+                    [date_opened] => 1/31/1994
+                    [account_satus] => Closed
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $14,400.00
+                )
+
+        )
+
+    [21] => Array
+        (
+            [title] => GUARANTY BANK 
+            [address] => 4143625700  4000 W BROWN DEER RD BROWN DEER, WI 53209  
+            [equifax] => Array
+                (
+                    [account_name] => GUARANTY BANK
+                    [account] => 882920XXXXX
+                    [account_type] => All Banks
+                    [balance] => $1,000.00
+                    [past_due] => $0.00
+                    [date_opened] => 6/16/2015
+                    [account_satus] => Closed
+                    [mo_payment] => $0.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $0.00
+                    [terms] => M 60M
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => GUARANTY BK
+                    [account] => 882920XXXXXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $1,000.00
+                    [past_due] => $0.00
+                    [date_opened] => 6/16/2015
+                    [account_satus] => Closed
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $0.00
+                    [terms] => 060 Months
+                )
+
+        )
+
+    [22] => Array
+        (
+            [title] => MABT/TFC  
+            [equifax] => Array
+                (
+                    [account_name] => MABT/TFC
+                    [account] => 777499XXX
+                    [account_type] => All Banks
+                    [balance] => $2,456.00
+                    [past_due] => $0.00
+                    [date_opened] => 2/14/2017
+                    [account_satus] => Open
+                    [mo_payment] => $180.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $3,500.00
+                    [terms] => M
+                )
+
+        )
+
+    [23] => Array
+        (
+            [title] => PENTAGON - BANKCARD 
+            [equifax] => Array
+                (
+                    [account_name] => PENTAGON - BANKCARD
+                    [account] => 430679XXXXXX
+                    [account_type] => National Credit Card Cos.
+                    [balance] => $5,453.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/7/2016
+                    [account_satus] => Open
+                    [mo_payment] => $109.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $5,000.00
+                    [terms] => M
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => PENTAGON FCU
+                    [account] => 430679XXXXXX
+                    [account_type] => Finance other than personal
+                    [balance] => $5,416.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/7/2016
+                    [account_satus] => Open
+                    [mo_payment] => $108.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $5,000.00
+                    [terms] => Minimum
+                )
+
+        )
+
+    [24] => Array
+        (
+            [title] => SYNCB/MARVEL MC 
+            [equifax] => Array
+                (
+                    [account_name] => SYNCB/MARVEL MC
+                    [account] => 524362XXXXXXXXXX
+                    [account_type] => All Banks
+                    [balance] => $2,098.00
+                    [past_due] => $0.00
+                    [date_opened] => 8/24/2017
+                    [account_satus] => Open
+                    [mo_payment] => $83.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $2,000.00
+                    [terms] => M
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => SYNCB/MARVEL
+                    [account] => 524362XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $2,059.00
+                    [past_due] => $0.00
+                    [date_opened] => 8/24/2017
+                    [account_satus] => Open
+                    [mo_payment] => $57.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $2,000.00
+                    [terms] => Minimum
+                )
+
+        )
+
+    [25] => Array
+        (
+            [title] => SYNCB/TJX CO DC 
+            [equifax] => Array
+                (
+                    [account_name] => SYNCB/TJX CO DC
+                    [account] => 524366XXXXXXXXXX
+                    [account_type] => National Credit Card Cos.
+                    [balance] => $928.00
+                    [past_due] => $0.00
+                    [date_opened] => 1/15/2017
+                    [account_satus] => Open
+                    [mo_payment] => $61.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $1,000.00
+                    [terms] => M
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => SYNCB/TJXDC
+                    [account] => 524366XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $928.00
+                    [past_due] => $0.00
+                    [date_opened] => 1/15/2017
+                    [account_satus] => Open
+                    [mo_payment] => $61.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $1,000.00
+                    [terms] => Minimum
+                )
+
+        )
+
+    [26] => Array
+        (
+            [title] => US BANK HOME MTG 
+            [equifax] => Array
+                (
+                    [account_name] => US BANK HOME MTG
+                    [account] => 515990XXXXXXX
+                    [account_type] => Mortgage Cos.
+                    [balance] => $107,908.00
+                    [past_due] => $0.00
+                    [date_opened] => 7/15/2016
+                    [account_satus] => Open
+                    [mo_payment] => $866.00
+                    [payment_status] => Pays account as agreed
+                    [limit] => $0.00
+                    [terms] => M 30Y
+                    [comments] => FIXED RATE
+                )
+
+            [transunion] => Array
+                (
+                    [account_name] => US BK HM MTG
+                    [account] => 515990XXXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $107,908.00
+                    [past_due] => $0.00
+                    [date_opened] => 7/15/2016
+                    [account_satus] => Open
+                    [mo_payment] => $866.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $0.00
+                    [terms] => 360 Months
+                )
+
+        )
+
+    [27] => Array
+        (
+            [title] => BRCLYSBANKDE 
+            [transunion] => Array
+                (
+                    [account_name] => BRCLYSBANKDE
+                    [account] => 000278XXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $12,359.00
+                    [past_due] => $0.00
+                    [date_opened] => 11/30/2016
+                    [account_satus] => Open
+                    [mo_payment] => $368.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $1,000.00
+                    [terms] => Minimum
+                )
+
+        )
+
+    [28] => Array
+        (
+            [title] => BRCLYSBANKDE 
+            [address] => 8663705931  P.O. BOX 8803 WILMINGTON, DE 19899  
+            [transunion] => Array
+                (
+                    [account_name] => BRCLYSBANKDE
+                    [account] => 000263XXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $5,306.00
+                    [past_due] => $0.00
+                    [date_opened] => 3/22/2016
+                    [account_satus] => Open
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $20,000.00
+                )
+
+        )
+
+    [29] => Array
+        (
+            [title] => CAP1/CABEL 
+            [address] => 8005527963  4800 NW 1ST STREETSUITE 300 LINCOLN, NE 68521  
+            [transunion] => Array
+                (
+                    [account_name] => CAP1/CABEL
+                    [account] => 430023XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $5,868.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/28/2014
+                    [account_satus] => Open
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $15,000.00
+                )
+
+        )
+
+    [30] => Array
+        (
+            [title] => CAP1/CABEL 
+            [address] => 8005527963  4800 NW 1ST STREETSUITE 300 LINCOLN, NE 68521  
+            [transunion] => Array
+                (
+                    [account_name] => CAP1/CABEL
+                    [account] => 430023XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $5,985.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/9/2001
+                    [account_satus] => Open
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $22,500.00
+                )
+
+        )
+
+    [31] => Array
+        (
+            [title] => CASTLE CR  
+            [address] => 7733807310  8420 W BRYN MAWRS-300 CHICAGO, IL 60631  
+            [transunion] => Array
+                (
+                    [account_name] => CASTLE CR
+                    [account] => 1XXXX
+                    [account_type] => Finance, personal
+                    [balance] => $2,949.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/13/2016
+                    [account_satus] => Open
+                    [mo_payment] => $112.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $0.00
+                    [terms] => 036 Months
+                )
+
+        )
+
+    [32] => Array
+        (
+            [title] => CITI  
+            [transunion] => Array
+                (
+                    [account_name] => CITI
+                    [account] => 542418XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $6,276.00
+                    [past_due] => $0.00
+                    [date_opened] => 6/11/2007
+                    [account_satus] => Open
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $10,000.00
+                )
+
+        )
+
+    [33] => Array
+        (
+            [title] => DISCOVERBANK 
+            [address] => 8003472683  POB 15316 WILMINGTON, DE 19850  
+            [transunion] => Array
+                (
+                    [account_name] => DISCOVERBANK
+                    [account] => 601120XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $329.00
+                    [past_due] => $0.00
+                    [date_opened] => 5/25/2016
+                    [account_satus] => Open
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $35,000.00
+                )
+
+        )
+
+    [34] => Array
+        (
+            [title] => DISCOVERBANK 
+            [address] => 8003472683  POB 15316 WILMINGTON, DE 19850  
+            [transunion] => Array
+                (
+                    [account_name] => DISCOVERBANK
+                    [account] => 601129XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $12,357.00
+                    [past_due] => $0.00
+                    [date_opened] => 6/12/2003
+                    [account_satus] => Open
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $15,500.00
+                )
+
+        )
+
+    [35] => Array
+        (
+            [title] => DISCOVERBANK 
+            [address] => 8003472683  POB 15316 WILMINGTON, DE 19850  
+            [transunion] => Array
+                (
+                    [account_name] => DISCOVERBANK
+                    [account] => 601149XXXXXX
+                    [account_type] => Banks and S&Ls
+                    [balance] => $8,644.00
+                    [past_due] => $0.00
+                    [date_opened] => 10/5/1999
+                    [account_satus] => Open
+                    [mo_payment] => $0.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $11,200.00
+                )
+
+        )
+
+    [36] => Array
+        (
+            [title] => MABTC/TFC  
+            [address] => 8884131083  PO BOX 13306 VIRGINIA BEACH, VA 23464 
+            [transunion] => Array
+                (
+                    [account_name] => MABTC/TFC
+                    [account] => 7XXXX
+                    [account_type] => Finance, personal
+                    [balance] => $2,456.00
+                    [past_due] => $0.00
+                    [date_opened] => 2/14/2017
+                    [account_satus] => Open
+                    [mo_payment] => $180.00
+                    [payment_status] => Paid or paying as agreed
+                    [limit] => $3,500.00
+                    [terms] => Minimum
+                )
+
+        )
+
+)

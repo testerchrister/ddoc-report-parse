@@ -5,7 +5,11 @@ class Home extends CI_Controller
 {
 	private $validation_errors = "";
 	private $status = false;
-	function index()
+	public function __construct()
+	{
+		parent::__construct();
+	}
+	public function identity_iq()
 	{
 		if (strtolower($_SERVER["REQUEST_METHOD"]) == 'post') {
 			$this->load->library('form_validation');
@@ -73,5 +77,18 @@ class Home extends CI_Controller
     	}
     	$this->form_validation->set_message('authenticate', 'Invalid passcode.');
     	return false;
+    }
+
+    public function test()
+    {
+    	echo "Hello World!";
+    	die();
+    }
+
+    public function index()
+    {  	
+    	$this->load->view('header_tpl');
+		$this->load->view('report_types');
+		$this->load->view('footer_tpl');
     }
 }

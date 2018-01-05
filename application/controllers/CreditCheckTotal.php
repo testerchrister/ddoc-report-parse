@@ -2,7 +2,7 @@
 ini_set('max_execution_time', 0);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CreditCheckTotal extends CI_Controller
+class Creditchecktotal extends CI_Controller
 {
 	private $validation_errors = "";
 	private $status = false;
@@ -286,6 +286,12 @@ class CreditCheckTotal extends CI_Controller
     {
     	echo "<pre>";
     	print_r($this->response_messages);
+    	die();
+    }
+
+    public function test()
+    {
+    	echo "Hello Welcome to CCT Parser Tester";
     	die();
     }
 }
