@@ -52,5 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['cct'] = 'creditchecktotal/index';
 $route['iiq'] = 'home/identity_iq';
+$route['cct_parser'] = 'creditchecktotal/cct_parser';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

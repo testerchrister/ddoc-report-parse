@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('max_execution_time', 0);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -26,14 +27,18 @@ class Creditchecktotal extends CI_Controller
 					if (!array_key_exists('error', $result)) {
 						$report_info = array("user_id" => 1001, "file_name" => $result["upload_data"]["file_name"]);
 						$this->load->model("report_parser_model");
-						$this->report_type_info = $this->report_model->get_report_type_info('credit-check-total');
+						$this->report_type_info = $this->report_model->get_report_type_info(CCT_NAME);
 						$report_info['report_type'] = $this->report_type_info->id;	
 						$doc_id = $this->report_parser_model->save_report_file($report_info);
 						if($doc_id){
 							$this->current_doc['id'] = $doc_id;
-							$this->startParsing();							
+							//$this->startParsing();							
+							echo $doc_id;
+							return;
 						} else {
 							$this->validation_errors = "Error: Unable to start document parsing. Failed to save report file.";
+							echo "error";
+							return;
 						}
 
 					} else {
@@ -282,6 +287,35 @@ class Creditchecktotal extends CI_Controller
     	}
     }
 
+    public function cct_parser()
+    {
+    	if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+    		$doc_id = $this->input->post('doc_id');
+    		$method = $this->input->post('method');
+    		echo $doc_id;
+    		echo $method;
+    		return;	
+    		if(isset($doc_id) && is_valid_doc_id($doc_id) && isset($method) && !empty($method)) {
+    			switch ($method) {
+    				case "personal_info":
+
+    					break;
+    				case "":
+    					break;
+    				case "":
+    					break;
+    				case "":
+    					break;
+    				case "":
+    					break;
+    			}
+    		}
+    		return;
+    	} else {
+    		echo "error";
+    		return;
+    	}
+    }
     private function printLog()
     {
     	echo "<pre>";

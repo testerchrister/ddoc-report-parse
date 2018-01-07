@@ -22,6 +22,8 @@ class Home extends CI_Controller
 						$report_info = array("user_id" => 1001, "file_name" => $result["upload_data"]["file_name"]);
 						$this->load->model("report_parser_model");
 						$doc_id = $this->report_parser_model->save_report_file($report_info);
+						echo $doc_id;
+						die();
 						if($doc_id){
 							$this->status = $this->report_parser_model->start_report_parsing($doc_id);
 						} else {
@@ -29,6 +31,8 @@ class Home extends CI_Controller
 						}
 					} else {
 						$this->validation_errors = $result['error'];
+						echo "error: failed to upload file";
+						die();
 					}	
 
 				} else {
