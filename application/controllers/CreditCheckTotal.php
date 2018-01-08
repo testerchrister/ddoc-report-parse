@@ -144,7 +144,7 @@ class Creditchecktotal extends CI_Controller
     	
     	$result = $this->credit_check_total->init($file_name);
     	if ($result) {
-    		$message = "Parsing document basic information started";    		
+    		$message = "Started Basic Information parsing.";    		
     		$this->set_progress($doc_id, $message);
     		$basic_info = $this->credit_check_total->getBasicInfo();    		
 
@@ -173,11 +173,11 @@ class Creditchecktotal extends CI_Controller
     			$this->response_messages[] = array('status' => $status, 'message' => $message);
     			$this->set_progress($doc_id, $message, $status);
     		}
-    		$message = "Satrted document index page parsing";
+    		$message = "Started document index page parsing";
     		$this->set_progress($doc_id, $message);
     		$info_types = $this->credit_check_total->getPageInfoType();
 
-    		if (is_array($info_types)  && count($info_types)) {
+    		if (is_array($info_types)  && count($info_types)) {	
     			$message = "Document index page parsed successfully!";
     			$this->set_progress($doc_id, $message);    			
     			$this->parseDocumentSections($info_types);
@@ -215,18 +215,17 @@ class Creditchecktotal extends CI_Controller
     	foreach ($info_types as $page_info) {
     		if (isset($page_info['title']) && preg_match('/Personal Information/', $page_info['title'])) {   			
 				if(isset($page_info['page_start']) && !empty($page_info['page_start']) && isset($page_info['page_end']) && !empty($page_info['page_end'])) {
-					$message = "Parsing personal information.."	;
+					$message = "Started personal information parsing."	;
 					$this->set_progress($doc_id, $message); 
 					$personal_info = $this->credit_check_total->getPersonalInformation($page_info['page_start'], $page_info['page_end']);
+					file_put_contents("temp_file.txt", print_r($personal_info, 1));
 					$p_info = array();
 					if (isset($personal_info) && is_array($personal_info) && count($personal_info)) {
 						if (isset($personal_info['experian']) && count($personal_info['experian'])) {
 							$tmp_info['bureau'] = 'experian';							
 							$tmp_info['name'] = isset($personal_info['experian']['name']) ? $personal_info['experian']['name'] : "";
 							$tmp_info['year_of_birth'] = isset($personal_info['experian']['year_of_birth']) ? $personal_info['experian']['year_of_birth'] : "";
-							if(isset($personal_info['experian']['addresses']) && count(isset($personal_info['experian']['addresses']))) {
-								$tmp_info['addresses'] = implode("*****", $personal_info['experian']['addresses']);
-							} 
+							$tmp_info['addresses'] = isset($personal_info['experian']['addresses']) ? $personal_info['experian']['addresses'] : "";
 							$tmp_info['current_employer'] = isset($personal_info['experian']['current_employer']) ? $personal_info['experian']['current_employer'] : "";
 							$tmp_info['previous_employer'] = isset($personal_info['experian']['previous_employer']) ? $personal_info['experian']['previous_employer'] : "";
 							$p_info[] = $tmp_info;
@@ -236,10 +235,7 @@ class Creditchecktotal extends CI_Controller
 							$tmp_info['bureau'] = 'equifax';							
 							$tmp_info['name'] = isset($personal_info['equifax']['name']) ? $personal_info['equifax']['name'] : "";
 							$tmp_info['year_of_birth'] = isset($personal_info['equifax']['year_of_birth']) ? $personal_info['equifax']['year_of_birth'] : "";
-							
-							if(isset($personal_info['equifax']['addresses']) && count(isset($personal_info['equifax']['addresses']))) {
-								$tmp_info['addresses'] = implode("*****", $personal_info['equifax']['addresses']);
-							}
+							$tmp_info['addresses'] = isset($personal_info['equifax']['addresses']) ? $personal_info['equifax']['addresses'] : "";
 							$tmp_info['current_employer'] = isset($personal_info['equifax']['current_employer']) ? $personal_info['equifax']['current_employer'] : "";
 							$tmp_info['previous_employer'] = isset($personal_info['equifax']['previous_employer']) ? $personal_info['equifax']['previous_employer'] : "";
 							$p_info[] = $tmp_info;
@@ -249,9 +245,7 @@ class Creditchecktotal extends CI_Controller
 							$tmp_info['bureau'] = 'transunion';							
 							$tmp_info['name'] = isset($personal_info['transunion']['name']) ? $personal_info['transunion']['name'] : "";
 							$tmp_info['year_of_birth'] = isset($personal_info['transunion']['year_of_birth']) ? $personal_info['transunion']['year_of_birth'] : "";
-							if(isset($personal_info['transunion']['addresses']) && count(isset($personal_info['transunion']['addresses']))) {
-								$tmp_info['addresses'] = implode("*****", $personal_info['transunion']['addresses']);
-							}
+							$tmp_info['addresses'] = isset($personal_info['transunion']['addresses']) ? $personal_info['transunion']['addresses'] : "";
 							$tmp_info['current_employer'] = isset($personal_info['transunion']['current_employer']) ? $personal_info['transunion']['current_employer'] : "";
 							$tmp_info['previous_employer'] = isset($personal_info['transunion']['previous_employer']) ? $personal_info['transunion']['previous_employer'] : "";
 							$p_info[] = $tmp_info;
