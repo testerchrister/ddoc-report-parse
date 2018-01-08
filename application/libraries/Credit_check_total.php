@@ -184,8 +184,7 @@ class Credit_check_total
 	//This method parse personal information section.
 	public function getPersonalInformation($page_start, $page_stop)
 	{
-		for($i = $page_start; $i <= $page_stop; $i++) {	
-			$_SESSION['progress'] = array('personal_info'=> array('offset' => floor((100 / ($page_stop - $page_start + 1) * 15))));
+		for($i = $page_start; $i <= $page_stop; $i++) {
 			$dom = $this->getPageDom($i);
 
 			if (!$dom instanceof DOMDocument) {
@@ -207,101 +206,20 @@ class Credit_check_total
 				foreach($paras as $p) {
 					$sub_head = $p->getElementsByTagName('i');
 					if ($sub_head instanceof DOMNodeList && $sub_head->length) {
-						foreach($sub_head as $sh) {
-							$bureau_index = 1;
-							$next_head = str_replace("Â", "", $sh->textContent);
+						if($p->hasAttribute('class') && $p->getAttribute('class') == 'ft04'){
+							$next_head = str_replace("Â", "", $p->textContent);
 						}
 						continue;
 					}
 					$content = $p->textContent;
 					$content = str_replace("Â", "", $content);
-					if(!empty($next_head) && preg_match("/Name/", $next_head)) {
-						if (!$name_parsed) {
-							switch ($bureau_index) {
-								case 1:
-									$personal_info['experian']['name'] = $content;
-									$bureau_index++;
-									break;
-								case 2:
-									$personal_info['equifax']['name'] = $content;
-									$bureau_index++;
-									break;
-								case 3:
-									$personal_info['transunion']['name'] = $content;
-									$bureau_index = 1;
-									$name_parsed = true;
-									break;
-							}
-						}
-						continue;
-					}
-					 
-					if (!empty($next_head) && preg_match("/AKA/", $next_head)) {
-						if (!$aka_parsed) {
-							switch($bureau_index) {
-								case 1:
-									$personal_info['experian']['aka'] = $content;
-									$bureau_index++;
-									break;
-								case 2:
-									$personal_info['equifax']['aka'] = $content;
-									$bureau_index++;
-									break;
-								case 3:
-									$personal_info['transunion']['aka'] = $content;
-									$bureau_index = 1;
-									$aka_found = false;
-									$aka_parsed = true;
-									break;
-							}
-						}
-						continue;
-					}
-					
 
-					if(!empty($next_head) && preg_match("/Year of Birth/", $next_head)) {
-						if (!$yob_parsed) {
-							switch($bureau_index) {
-								case 1:
-									$personal_info['experian']['year_of_birth'] = $content;
-									$bureau_index++;
-									break;
-								case 2:
-									$personal_info['equifax']['year_of_birth'] = $content;
-									$bureau_index++;
-									break;
-								case 3:
-									$personal_info['transunion']['year_of_birth'] = $content;
-									$bureau_index = 1;
-									$yob_parsed = true;
-									break;
-							}
-						}
-						continue;
+					if(preg_match('/Page\s\d/', $content)){
+						break;
 					}
-					
-					if(!empty($next_head) && preg_match("/Address/", $next_head)) {
-						if (!$address_parsed) {
-							switch($bureau_index) {
-								case 1:
-									$personal_info['experian']['addresses'] = explode('****', str_replace('&nbsp;&nbsp;', '****', $content));
-									$bureau_index++;
-									break;
-								case 2:
-									$personal_info['equifax']['addresses'] = explode('****', str_replace('&nbsp;&nbsp;', '****', $content));
-									$bureau_index++;
-									break;
-								case 3:
-									$personal_info['transunion']['addresses'] = explode('****', str_replace('&nbsp;&nbsp;', '****', $content));
-									$bureau_index = 1;
-									$address_parsed = true;
-									break;
-							}
-						}
-						continue;
-					}
+
 					$type = null;
-					if($p->hasAttribute('style')) {
+					if($p->hasAttribute('style')){
 						if(preg_match('/left:3\d\dpx/', $p->getAttribute('style'))) {
 							$type = 'experian';
 						} elseif(preg_match('/left:5\d\dpx/', $p->getAttribute('style'))) {
@@ -310,6 +228,42 @@ class Credit_check_total
 							$type = 'transunion';
 						}
 					}
+					if(!empty($next_head) && preg_match("/Name/", $next_head)) {
+						if($p->hasAttribute('class') && ($p->getAttribute('class') == 'ft01' || $p->getAttribute('class') == 'ft07')) {		
+							if (!empty($type)) {
+								$personal_info[$type]['name'] = $content;
+								continue;
+							}
+						}
+					}
+					 
+					if (!empty($next_head) && preg_match("/AKA/", $next_head)) {
+						if($p->hasAttribute('class') && ($p->getAttribute('class') == 'ft01' || $p->getAttribute('class') == 'ft07')) {		
+							if (!empty($type)) {
+								$personal_info[$type]['aka'] = $content;
+								continue;
+							}
+						}
+					}
+					
+					if(!empty($next_head) && preg_match("/Year of Birth/", $next_head)) {
+						if($p->hasAttribute('class') && $p->getAttribute('class') == 'ft01') {		
+							if (!empty($type)) {
+								$personal_info[$type]['year_of_birth'] = $content;
+								continue;
+							}
+						}
+					}
+					
+					if(!empty($next_head) && preg_match("/Address/", $next_head)) {
+						if($p->hasAttribute('class') && ($p->getAttribute('class') == 'ft01' || $p->getAttribute('class') == 'ft07')) {		
+							if (!empty($type)) {
+								$personal_info[$type]['addresses'] = $content;
+								continue;
+							}
+						}
+					}
+
 					if (!empty($next_head) && preg_match("/Current Employer/", $next_head)) {
 						if (!is_null($type) && !preg_match('/Page/', $content)) {
 							$personal_info[$type]['current_employer'] = $content;	
@@ -325,12 +279,12 @@ class Credit_check_total
 					}
 				}
 			} else {
-				die('Something goes wrong while parsinf the record');
+				log_message('error', 'Failed to parse personal information section');
+				break;
 			}
 		}
-		$_SESSION['progress'] = array('personal_info' => 100);		
+				
 		return $personal_info;
-
 	}
 
 	// This method parse report summary section.
@@ -349,134 +303,56 @@ class Credit_check_total
 			$next_head = $next_sub_head = '';
 			if ($paras instanceof DOMNodeList) {
 				foreach($paras as $p) {
-					$tmp_sub_head = $p->getElementsByTagName('i');
-					if ($tmp_sub_head instanceof DOMNodeList && $tmp_sub_head->length) {
-						foreach($tmp_sub_head as $sbh) {
-							$next_sub_head = str_replace("Â", "", $sbh->textContent);
-							//echo $next_sub_head . " -- Sub<br />";
-							$bureau_index = 1;
+					$content = str_replace("Â", "", $p->textContent);
+					if($p->hasAttribute('class') && $p->getAttribute('class') == "ft03") {
+						$next_head = $content;
+						continue;
+					}
+					if($p->hasAttribute('class') && $p->getAttribute('class') == "ft04") {
+						$next_sub_head = $content;
+						continue;
+					}
+
+					if($p->hasAttribute('class') && $p->getAttribute('class') == "ft01" && !empty($next_sub_head)) {
+
+						if(preg_match('/Page\s\d/', $content)) {
 							break;
 						}
-						continue;
-					}
 
-					$temp_head = $p->getElementsByTagName('b');
-					if ($temp_head instanceof DOMNodeList && $temp_head->length) {
-						foreach($temp_head as $nh) {
-							$next_head = str_replace("Â", "", $nh->textContent);
-							//echo $next_head . "<br />";
-							if (preg_match('/Report Summary/', $next_head)) {
-								$next_head = '';
+						$type = null;
+						if($p->hasAttribute('style')){
+							if(preg_match('/left:3\d\dpx/', $p->getAttribute('style'))) {
+								$type = 'experian';
+							} elseif(preg_match('/left:5\d\dpx/', $p->getAttribute('style'))) {
+								$type = 'equifax';
+							} elseif (preg_match('/left:7\d\dpx/', $p->getAttribute('style'))) {
+								$type = 'transunion';
 							}
 						}
-						continue;
-					}
-					$content = $p->textContent;
-					$content = str_replace("Â", "", $content);
-					if(!empty($next_sub_head) && preg_match('/Real Estate/', $next_head)) {
-						/*echo $next_sub_head; die();*/
-						switch ($bureau_index) {
-							case 1:
-								$report_summary['real_estate']['experian'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 2:
-								$report_summary['real_estate']['equifax'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 3:
-								$report_summary['real_estate']['transunion'][$next_sub_head] = $content;
-								$bureau_index = 1;
-								break;
-						}
-					}
-					if(!empty($next_sub_head) && preg_match('/Revolving/', $next_head)) {
-						/*echo $next_sub_head; die();*/
-						switch ($bureau_index) {
-							case 1:
-								$report_summary['revolving']['experian'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 2:
-								$report_summary['revolving']['equifax'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 3:
-								$report_summary['revolving']['transunion'][$next_sub_head] = $content;
-								$bureau_index = 1;
-								break;
-						}
-					}
 
-					if(!empty($next_sub_head) && preg_match('/Installments/', $next_head)) {
-						/*echo $next_sub_head; die();*/
-						switch ($bureau_index) {
-							case 1:
-								$report_summary['installments']['experian'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 2:
-								$report_summary['installments']['equifax'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 3:
-								$report_summary['installments']['transunion'][$next_sub_head] = $content;
-								$bureau_index = 1;
-								break;
+						if(preg_match('/Real Estate/', $next_head) && !is_null($type)) {
+							$report_summary['real_estate'][$type][$next_sub_head] = $content;
+							continue;
 						}
-					}
-
-					if(!empty($next_sub_head) && preg_match('/Other/', $next_head)) {
-						/*echo $next_sub_head; die();*/
-						switch ($bureau_index) {
-							case 1:
-								$report_summary['other']['experian'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 2:
-								$report_summary['other']['equifax'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 3:
-								$report_summary['other']['transunion'][$next_sub_head] = $content;
-								$bureau_index = 1;
-								break;
+						if(preg_match('/Revolving/', $next_head) && !is_null($type)) {
+							$report_summary['revolving'][$type][$next_sub_head] = $content;
+							continue;
 						}
-					}
-
-					if(!empty($next_sub_head) && preg_match('/Collections/', $next_head)) {
-						/*echo $next_sub_head; die();*/
-						switch ($bureau_index) {
-							case 1:
-								$report_summary['collections']['experian'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 2:
-								$report_summary['collections']['equifax'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 3:
-								$report_summary['collections']['transunion'][$next_sub_head] = $content;
-								$bureau_index = 1;
-								break;
+						if(preg_match('/Installments/', $next_head) && !is_null($type)) {
+							$report_summary['installments'][$type][$next_sub_head] = $content;
+							continue;
 						}
-					}
-
-					if(!empty($next_sub_head) && preg_match('/All Accounts/', $next_head)) {
-						/*echo $next_sub_head; die();*/
-						switch ($bureau_index) {
-							case 1:
-								$report_summary['all_accounts']['experian'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 2:
-								$report_summary['all_accounts']['equifax'][$next_sub_head] = $content;
-								$bureau_index++;
-								break;
-							case 3:
-								$report_summary['all_accounts']['transunion'][$next_sub_head] = $content;
-								$bureau_index = 1;
-								break;
+						if(preg_match('/Other/', $next_head) && !is_null($type)) {
+							$report_summary['other'][$type][$next_sub_head] = $content;
+							continue;
+						}
+						if(preg_match('/Collections/', $next_head) && !is_null($type)) {
+							$report_summary['collections'][$type][$next_sub_head] = $content;
+							continue;
+						}
+						if(preg_match('/All Accounts/', $next_head) && !is_null($type)) {
+							$report_summary['all_accounts'][$type][$next_sub_head] = $content;
+							continue;
 						}
 					}
 				}

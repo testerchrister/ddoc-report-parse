@@ -130,23 +130,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						last_msg = data.progress;						
 					}
 
-					if (tot_progress < 95) {
-		    			setTimeout(function() {
-		    				trackParsing(doc_id);
-							$('#progress-bar-total').width(tot_progress+'%');
-							$('#tot-progress-count').html(tot_progress);
-							tot_progress++;
-						}, 5000);		
-		    		} else if(data.status == "completed") {
+					if(data.status == "completed") {
 		    			$('#progress-bar-total').width('100%');
 						$('#tot-progress-count').html("100");
 						$('#user-file').removeAttr('disabled');
     					$('#submit-btn').removeAttr('disabled');
 		    			return;
+		    		} else if (tot_progress < 95) {
+		    			setTimeout(function() {
+		    				trackParsing(doc_id);
+							$('#progress-bar-total').width(tot_progress+'%');
+							$('#tot-progress-count').html(tot_progress);
+							tot_progress +=5;
+						}, 5000);		
 		    		} else {
 		    			setTimeout(function() {
 		    				trackParsing(doc_id);
-		    			}, 5000);
+		    			}, 2000);
 		    		}
 				}
 			});
