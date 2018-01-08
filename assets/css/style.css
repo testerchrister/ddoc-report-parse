@@ -15,8 +15,12 @@
 	text-align: center;
 }
 .masthead h1 {
-    font-size: 4.5rem;
+    font-size: 2.5rem;
 }
 .progress-txt{
 	color:#666;
+}
+.parse-updates{
+	color: #333;
+	font-style: italic;
 }

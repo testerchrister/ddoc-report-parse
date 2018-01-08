@@ -9,10 +9,13 @@ class Identity_iq_parser
 	private $file_path;
 	private $parse_response_messages;
 	protected $CI;
+	private $doc_id;
+
 	function __construct($param)
 	{
 		$this->CI = & get_instance();
 		$this->report_doc = $param['file_name'];
+		$this->doc_id = $param['id'];
 		$this->parse_result["basic_info"] = null;
 		$this->file_path = FCPATH."uploads".DIRECTORY_SEPARATOR."reports".DIRECTORY_SEPARATOR . $this->report_doc; 
 		if (!file_exists($this->file_path)) {
@@ -25,89 +28,129 @@ class Identity_iq_parser
 		if (!$data) {
 			throw new Exception("Error: Unable to processing file content", 1);			
 		}
-
+		$doc_id = $this->doc_id;
 		$dom = new DOMDocument();
 		@$dom->loadHTML($data);
 		$dom->preserveWhiteSpace = false;
 		
 		// Parse the basic information like report date & reference number
+		$message = "Started parsing basic information";
+		$this->set_progress($doc_id, $message);
 		$res = $this->parseReportBasicInfo($dom);
 		if ($res) {
-			$this->parse_response_messages[] = array('status' => 'success', 'message' => 'Basic Information parsed successfully.');
+			$message = 'Basic Information parsed successfully.';
+			$this->set_progress($doc_id, $message);
+			$this->parse_response_messages[] = array('status' => 'success', 'message' => $message);
 		} else {
-			$this->parse_response_messages[] = array('status' => 'error', 'message' => 'Failed to parse basic information.');
+			$message = 'Failed to parse basic information.';
+			$this->set_progress($doc_id, $message);
+			$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
 		}
 		//Get all credit bureaus
+		$message = 'Started parsing Credit Bureaus information';
+		$this->set_progress($doc_id, $message);
 		$credit_bureau = $dom->getElementsByTagName('table')->item(BUREAUS_TABLE_INDEX);
 		$res = $this->getCreditBureaus($credit_bureau);
 		if ($res) {
-			$this->parse_response_messages[] = array('status' => 'success', 'message' => 'Credit Bureau Information parsed successfully.');
+			$message = 'Credit Bureau Information parsed successfully.';
+			$this->parse_response_messages[] = array('status' => 'success', 'message' => $message);
 		} else {
-			$this->parse_response_messages[] = array('status' => 'error', 'message' => 'Failed to parse credit bureau information.');
-		}
+			$message = 'Failed to parse credit bureau information.';
+			$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
+		}		
+		$this->set_progress($doc_id, $message);
 
 		//Personal Information in various credit reports
+		$message = 'Started parsing Personal Information';
+		$this->set_progress($doc_id, $message);
 		$personal_info_section = $dom->getElementsByTagName('table')->item(PERSONAL_TABLE_INDEX);
 		$res = $this->getPersonalInfo($personal_info_section);	
 		if ($res) {
-			$this->parse_response_messages[] = array('status' => 'success', 'message' => 'Personal Information parsed successfully.');
+			$message =  'Personal Information parsed successfully.';
+			$this->parse_response_messages[] = array('status' => 'success', 'message' => $message);
 		} else {
-			$this->parse_response_messages[] = array('status' => 'error', 'message' => 'Failed to parse Personal Information.');
+			$message = 'Failed to parse Personal Information.';
+			$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
 		}
+		$this->set_progress($doc_id, $message);
 
 		//Credit Score
+		$message = 'Started parsing Credit Score';
+		$this->set_progress($doc_id, $message);
  		$cs_title_div = $dom->getElementById(CREDIT_SCORE_DIV_ID);
  		if ($cs_title_div) {
  			$res = $this->parseCreditScore($cs_title_div);
  			if ($res) {
-				$this->parse_response_messages[] = array('status' => 'success', 'message' => 'Credit Score parsed successfully.');
+ 				$message = 'Credit Score parsed successfully.';
+				$this->parse_response_messages[] = array('status' => 'success', 'message' => $message);
 			} else {
-				$this->parse_response_messages[] = array('status' => 'error', 'message' => 'Failed to parse Credit Score.');
+				$message = 'Failed to parse Credit Score.';
+				$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
 			}
  		} else {
- 			$this->parse_response_messages[] = array('status' => 'error', 'message' => 'No Credit Score table information found');
+ 			$message = 'No Credit Score table information found'; 
+ 			$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
  		}
+ 		$this->set_progress($doc_id, $message);
 
  		//Account History
+ 		$message = 'Started parsing Account History';
+		$this->set_progress($doc_id, $message);
  		$ah_title_div = $dom->getElementById(ACCOUNT_HISTORY_DIV_ID);
  		if ($ah_title_div) {
  			$res = $this->parseAccountHistory($ah_title_div);
  			if ($res) {
- 				$this->parse_response_messages[] = array('status' => 'success', 'message' => 'Account History parsed successfully.');
+ 				$message = 'Account History parsed successfully.';
+ 				$this->parse_response_messages[] = array('status' => 'success', 'message' => $message);
  			} else {
- 				$this->parse_response_messages[] = array('status' => 'error', 'message' => 'Failed to parse Account History.');
+ 				$message = 'Failed to parse Account History.';
+ 				$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
  			}
  		} else {
- 			$this->parse_response_messages[] = array('status' => 'error', 'message' => 'No Account History table found in the document');
+ 			$message = 'No Account History table found in the document';
+ 			$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
  		}
+ 		$this->set_progress($doc_id, $message);
 
  		//Public Information 
+ 		$message = "Started parsing Public Information";
+ 		$this->set_progress($doc_id, $message);
  		$pi_title_div = $dom->getElementById(PUBIC_INFORMATION);
  		if($pi_title_div) {
  			$res = $this->parsePublicInformation($pi_title_div);	
  			if ($res) {
- 				$this->parse_response_messages[] = array('status' => 'success', 'message' => 'Public Information parsed successfully.');
+ 				$message = 'Public Information parsed successfully.';
+ 				$this->parse_response_messages[] = array('status' => 'success', 'message' => $message);
  			} else {
- 				$this->parse_response_messages[] = array('status' => 'error', 'message' => 'No Public Information table found');
+ 				$message = 'No Public Information table found';
+ 				$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
  			}
  		} else{
- 			$this->parse_response_messages[] = array('status' => 'error', 'message' => 'No Public Information table found');
+ 			$message = 'No Public Information table found';
+ 			$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
  		}
- 		
+ 		$this->set_progress($doc_id, $message);
 
  		//Creditors Contact Information
+ 		$message = "Started parsing Creditors Contact Information";
+ 		$this->set_progress($doc_id, $message);
 	 	$creditor_contacts_div = $dom->getElementById(CREDITOR_CONTACTS);
 	 	if($creditor_contacts_div) {
 	 		$res = $this->parseCreditorsContact($creditor_contacts_div);
 	 		if ($res) {
- 				$this->parse_response_messages[] = array('status' => 'success', 'message' => 'Creditors Contact Information parsed successfully.');
+	 			$message = 'Creditors Contact Information parsed successfully.';
+ 				$this->parse_response_messages[] = array('status' => 'success', 'message' => $message);
  			} else {
- 				$this->parse_response_messages[] = array('status' => 'error', 'message' => 'No Creditors Contact Information table found');
+ 				$message = 'No Creditors Contact Information table found';
+ 				$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
  			}
 	 	} else {
-	 		$this->parse_response_messages[] = array('status' => 'error', 'message' => "Warning: No Creditor Contacts table found");
+	 		$message = "Warning: No Creditor Contacts table found";
+	 		$this->parse_response_messages[] = array('status' => 'error', 'message' => $message);
 	 	}
-				
+		$this->set_progress($doc_id, $message);
+		$message = "Credit Report document parsing completed successfully.";
+		$this->set_progress($doc_id, $message, 'completed');
 	 	return array('parse_result' => $this->parse_result, "response_messages" => $this->parse_response_messages);	
 	}
 
@@ -545,6 +588,22 @@ class Identity_iq_parser
 	{
 		echo "Hello Testing";
 	}
+	public function set_progress($doc_id, $message = '', $status = 'success')
+    {
+    	session_start();
+    	if (!isset($doc_id)) {
+    		return false;
+    	}
+    	if (!isset($_SESSION['iiq'][$doc_id])) {
+    			$_SESSION['iiq'][$doc_id] = array();
+    			$_SESSION['iiq'][$doc_id]['progress'] = "";
+    	}
+
+		$_SESSION['iiq'][$doc_id]['doc_id'] = $doc_id;
+		$_SESSION['iiq'][$doc_id]['progress'] .= "<br />" . $message;
+		$_SESSION['iiq'][$doc_id]['status'] = $status;
+		session_write_close();
+    }
 }
 
  

@@ -184,8 +184,10 @@ class Credit_check_total
 	//This method parse personal information section.
 	public function getPersonalInformation($page_start, $page_stop)
 	{
-		for($i = $page_start; $i <= $page_start; $i++) {	
+		for($i = $page_start; $i <= $page_stop; $i++) {	
+			$_SESSION['progress'] = array('personal_info'=> array('offset' => floor((100 / ($page_stop - $page_start + 1) * 15))));
 			$dom = $this->getPageDom($i);
+
 			if (!$dom instanceof DOMDocument) {
 				log_message('error', "Unable to convert page to DOM Object");
 				return false;
@@ -325,7 +327,8 @@ class Credit_check_total
 			} else {
 				die('Something goes wrong while parsinf the record');
 			}
-		}		
+		}
+		$_SESSION['progress'] = array('personal_info' => 100);		
 		return $personal_info;
 
 	}

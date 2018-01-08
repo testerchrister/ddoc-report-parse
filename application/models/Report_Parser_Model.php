@@ -19,10 +19,19 @@ class Report_parser_model extends CI_Model
 	function start_report_parsing($doc_id)
 	{
 		$response = "";
+		$message = "Started report document parsing.";
+		$this->set_progress($doc_id, $message);
 		$status = $this->get_doc_parse_satus($doc_id);
 		if (!$status) {
+			$doc_info = $this->get_file_info($doc_id);
+			if(!$doc_info) {
+				$this->set_progress(0, "DOC ID missing", 'error');
+				return;
+			} else{
+				$this->current_doc = $doc_info;
+			}
 			try{
-				$this->load->library('identity_iq_parser', $this->current_doc);
+				$this->load->library('identity_iq_parser', $doc_info);
 				try{
 					$result = $this->identity_iq_parser->reportParsingProcess();	
 				} catch(Exception $e) {
@@ -30,16 +39,24 @@ class Report_parser_model extends CI_Model
 				}
 				
 				if(is_array($result) && count($result)){
+					$message = "Credit Report document parsing completed successfully.";
+					$this->set_progress($doc_id, $message, 'completed');
 					$this->response_messages = $result["response_messages"];
 					$this->saveParseReportDetails($result["parse_result"]);
+					$message = "Saved report document parsing.";
+					$this->set_progress($doc_id, $message, 'completed');
 				} else {
-					$response = array('status' => "error", "message" => "Failed to complete credit report document parsing");
+					$message = "Failed to complete credit report document parsing";
+					$this->set_progress($doc_id, $message, 'error');
+					$response = array('status' => "error", "message" => $message);
 				}
 			} catch(Exception $e) {
 				$response = array('status' => "error", "message" => $e->getMessage());
 			}
-		} else {
-			$response = array('status' => "error", "message" => "This document is already processed. Reff ID# ".$doc_id);
+		} else {			
+			$message = "This document has already processed. Reff ID# ".$doc_id;
+			$this->set_progress($doc_id, $message, 'error');
+			$response = array('status' => "error", "message" => $message);
 		}
 		return $this->response_messages;
 	}
@@ -287,6 +304,22 @@ class Report_parser_model extends CI_Model
 		return false;
 	}
 
+
+	public function set_progress($doc_id, $message = '', $status = 'success')
+    {
+    	//session_start();
+    	if (!isset($doc_id)) {
+    		return false;
+    	}
+    	if (!isset($_SESSION['iiq'][$doc_id])) {
+    			$_SESSION['iiq'][$doc_id] = array();
+    	}
+		$_SESSION['iiq'][$doc_id]['doc_id'] = $doc_id;
+		$_SESSION['iiq'][$doc_id]['progress'] = $message;
+		$_SESSION['iiq'][$doc_id]['status'] = $status;
+		session_write_close();
+    }
+
 	/********************** Credit Check Total *****************************/
 	public function start_cct_report_parsing($doc_id)
 	{
@@ -297,6 +330,18 @@ class Report_parser_model extends CI_Model
 			print($content);
 		}
 		die();
+	}
+
+	public function get_file_info($doc_id)
+	{
+		try{
+			$res = $this->db->get_where('report_documents', array('id' => $doc_id))->row_array();
+		} catch(Exception $e){
+			log_message('error', "Failed to fecth file info." . $e->getMessage());
+			return false;
+		}
+
+		return $res;
 	}
 
 }
