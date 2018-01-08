@@ -51,7 +51,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'home';
 $route['cct'] = 'creditchecktotal/index';
+$route['ajax_post'] = 'creditchecktotal/ajax_post';
 $route['iiq'] = 'home/identity_iq';
+$route['iiq_init'] = 'home/iiq_init';
+$route['iiq_parser'] = 'home/doc_iiq_post';
+$route['iiq_progress'] = 'home/parse_progress_iiq';
 $route['cct_parser'] = 'creditchecktotal/cct_parser';
+$route['cct_init'] = 'creditchecktotal/cct_init';
+$route['cct_progress'] = 'home/parse_progress';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
