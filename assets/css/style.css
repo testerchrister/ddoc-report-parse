@@ -17,14 +17,14 @@
 .masthead h1 {
     font-size: 2.5rem;
 }
-.progress{
+#progress-upload, .parse-updates{
 	display: none;
 }
 .progress-txt{
 	color:#666;
 	display: none;
 }
-.parse-updates{
+.parse-updates, #progress-upload{
 	color: #333;
 	font-style: italic;
 }
@@ -45,4 +45,9 @@
 }
 .login-form{
 	margin-top: 5rem;
+}
+
+#status-message{
+	max-height: 65px; 
+	overflow-y: scroll;
 }

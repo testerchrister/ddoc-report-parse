@@ -25,14 +25,15 @@ class Identityiq extends CI_Controller
 	public function doc_iiq_post()
 	{
 		if (strtolower($_SERVER["REQUEST_METHOD"]) == 'post') {
+            $this->load->model("report_parser_model");
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('passcode', "Pass Code", "required|callback_authenticate");
+            $this->form_validation->set_rules('userfile', "Report Document", 'callback_file_check');
 			if ($this->form_validation->run()) {
 				if (!$_FILES['userfile']['error']) {
 					$result = $this->do_upload();
 					if (!array_key_exists('error', $result)) {
-						$report_info = array("user_id" => 1001, "file_name" => $result["upload_data"]["file_name"]);
-						$this->load->model("report_parser_model");
+						$report_info = array("user_id" => $_SESSION['user_id'], "file_name" => $result["upload_data"]["file_name"]);
+						
 						$doc_id = $this->report_parser_model->save_report_file($report_info);
 						if($doc_id){
 							$this->doc_id = $doc_id;
@@ -54,12 +55,28 @@ class Identityiq extends CI_Controller
 					$message = "Error: Failed to upload file";
 					$this->report_parser_model->set_progress($doc_id, $message, 'error');
 				} 
-			}
+			} else {
+                $message = validation_errors();
+                $this->report_parser_model->set_progress(0, $message, 'error');
+            }
 			$status = $this->parse_progress_iiq(true);	
 			echo $status;
-		}
+		} else{
+            redirect('iiq');
+        }
 	}
 
+    public function file_check($str)
+    {
+        $allowed_mime_types = array('application/xhtml+xml', 'text/html');
+        $file_mime = get_mime_by_extension($_FILES['userfile']['name']);
+        if (in_array($file_mime, $allowed_mime_types)) {
+            return true;
+        } else {
+            $this->form_validation->set_message('file_check', 'Please select only HTML file.');
+            return false;
+        }
+    }
 	public function do_upload()
     {
         $config['upload_path']		= './uploads/reports/';
@@ -135,10 +152,10 @@ class Identityiq extends CI_Controller
     		}
     		
     		$status = "";
-    		if (isset($doc_id) && is_numeric($doc_id)) {
+    		if (isset($doc_id) && is_numeric($doc_id) && isset($_SESSION["iiq"])) {
     			$status = json_encode($_SESSION['iiq'][$doc_id]);
     		} else {
-    			$status = json_encode(array('status' => 'error', 'progress' => 'Unable to track parsing process'));
+    			$status = json_encode(array('status' => 'error', 'progress' => 'Unable to track parsing process. Session expired'));
     		}
     		
     		if ($internal) {

@@ -15,18 +15,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div id="targetLayer"></div>
 
 		</form>
-		<div class="progress" id="progress-upload">
-		 	<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
+		<div id="progress-upload">
+		<div class="progress">
+		 	<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" id="progress-bar-upload"></div>
 		</div>
 		<span class="progress-txt">File uploading <i id="progress-count"></i></span>
+		</div>
 		<div class="parse-updates">
-			<div class="progress" id="progress-parsing">
-		 		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" id="progress-bar-total"></div>
+			<div class="progress">
+		 		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progress-bar-total"></div>
 			</div>
 			<span id="tot-progress"><i id="tot-progress-count"></i></span>
 			<div class="cur-parse-process">
 				<div class="progress-status" id="status-message"></div>
-				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" id="process-progress-bar"></div>
 			</div>
 		</div>
 		</div>
@@ -69,19 +70,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		var tot_progress = 0;
     	$('#iiqForm').submit(function(e) {	
     		e.preventDefault();
+    		if($('#userfile').val() == "") {
+    			return;
+    		}
     		$('#progress-upload').show();
     		$('.progress-txt').show();
     		$(this).ajaxSubmit({
     			target: '#targetLayer',
     			beforeSubmit: function(){
-    				$('#progress-bar').width('0%');
+    				$('#progress-bar-upload').width('0%');
     				$('#user-file').attr('disabled','disabled');
     				$('#submit-btn').attr('disabled','disabled');
     			},
     			uploadProgress: function(event, position, total, percentComplete){
-    				$('#progress-bar').width(percentComplete + '%');
+    				$('#progress-bar-upload').width(percentComplete + '%');
+    				$('#progress-bar-upload').attr('aria-valuenow', percentComplete);
     				$('#progress-count').html(percentComplete + "%");
-    				$('#progress-bar').attr('aria-valuenow', percentComplete);
     			},
     			success: function(){
     				var response = $('#targetLayer').html();
@@ -97,8 +101,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     					$('#status-message').html(doc_info.progress);
     					trackParsing(doc_id);
     					initDocParsing(doc_id);
+    				} else {
+    					$('#status-message').html(doc_info.progress);
     				}
     			},
+    			resetForm: true
     		});
     		return false;
     	});
@@ -108,8 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     		if (isNaN(doc_id) || doc_id == undefined) {
     			return false;
     		}
-    		$('#progress-parsing').show();
-    		$('#tot-progress').show();
+    		$('.parse-updates').show();
     		var $url = "<?=base_url('iiq_init')?>";
     		$data = {"doc_id":doc_id};    		
     		$.ajax({
@@ -122,7 +128,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					try{
 						$('#status-message').html("<span>"+data.progress+"<span>");
 						$('#progress-bar-total').width('100%');
-						$('#tot-progress-count').html('100%');
+						$('#tot-progress-count').html('Document Parsing Progress 100%');
 					}catch(e){
 						return false;
 					}
@@ -147,7 +153,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 					 if(data.status == "completed") {
 		    			$('#progress-bar-total').width('100%');
-						$('#tot-progress-count').html("100");
+						$('#tot-progress-count').html("Document Parsing Progress 100%");
 						$('#user-file').removeAttr('disabled');
     					$('#submit-btn').removeAttr('disabled');
 		    			return;
@@ -155,7 +161,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    			setTimeout(function() {
 		    				trackParsing(doc_id);
 							$('#progress-bar-total').width(tot_progress+'%');
-							$('#tot-progress-count').html(tot_progress + "%");
+							$('#tot-progress-count').html("Document Parsing Progress " + tot_progress + "%");
 							tot_progress += 5;
 						}, 1000);		
 		    		} else {
