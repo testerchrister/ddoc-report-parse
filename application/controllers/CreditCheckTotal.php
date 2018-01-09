@@ -9,14 +9,17 @@ class Creditchecktotal extends CI_Controller
 	private $report_type_info;
 	private $current_doc;
 	private $response_messages;
+
 	public function __construct()
 	{
 		parent::__construct();
+		if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+            redirect('login');
+        }
 		$this->load->model("report_model");
 	}
 	public function index()
-	{
-		
+	{		
 		$data = array('error' => $this->validation_errors, 'parse_report' => $this->response_messages);
 		$this->load->view('header_tpl');
 		$this->load->view('credit_check_total_tpl', $data);
@@ -27,13 +30,13 @@ class Creditchecktotal extends CI_Controller
 	{
 		if (strtolower($_SERVER["REQUEST_METHOD"]) == 'post') {
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('passcode', "Pass Code", "required|callback_authenticate");
+			$this->form_validation->set_rules('userfile', "Report Document", "callback_file_check");
 			if ($this->form_validation->run()) {
 
 				if (!$_FILES['userfile']['error']) {
 					$result = $this->do_upload();
 					if (!array_key_exists('error', $result)) {
-						$report_info = array("user_id" => 1001, "file_name" => $result["upload_data"]["file_name"]);
+						$report_info = array("user_id" => $_SESSION['user_id'], "file_name" => $result["upload_data"]["file_name"]);
 						$this->load->model("report_parser_model");
 						$this->report_type_info = $this->report_model->get_report_type_info(CCT_NAME);
 						$report_info['report_type'] = $this->report_type_info->id;
@@ -68,6 +71,7 @@ class Creditchecktotal extends CI_Controller
 			
 		}
 	}
+
 	public function do_upload()
     {
         $config['upload_path']		= './uploads/cct-reports/';
@@ -95,6 +99,18 @@ class Creditchecktotal extends CI_Controller
         }
     }
 
+    public function file_check($str)
+    {
+        $allowed_mime_types = array('application/pdf');
+        $file_mime = get_mime_by_extension($_FILES['userfile']['name']);
+        if (in_array($file_mime, $allowed_mime_types)) {
+            return true;
+        } else {
+            $this->form_validation->set_message('file_check', 'Please upload PDF file only.');
+            return false;
+        }
+    }
+
     public function authenticate($passcode)
     {
     	if($passcode == PASSCODE){
@@ -118,6 +134,7 @@ class Creditchecktotal extends CI_Controller
     		$this->startParsing();
     	}
     }
+
     private function startParsing()
     {	
     	if(isset($this->current_doc['id']) && is_numeric($this->current_doc['id'])) {
@@ -404,12 +421,6 @@ class Creditchecktotal extends CI_Controller
     {
     	echo "<pre>";
     	print_r($this->response_messages);
-    	die();
-    }
-
-    public function test()
-    {
-    	echo "Hello Welcome to CCT Parser Tester";
     	die();
     }
 

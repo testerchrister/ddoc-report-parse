@@ -19,8 +19,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<img src="<?=base_url('assets/img/logo.png')?>">
 		</div>
 		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+        		<a href="<?=base_url('home')?>" class="nav-link disabled">Home</a>
+      		</li>
 		<?php if(isset($_SESSION['user_id'])) :	?>
-			<li class="nav-item dropdown">
+			<li class="nav-item dropdown active">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"> DOC Parser</a>
 				<div class="dropdown-menu" aria-labelledby="download">
                 <a class="dropdown-item" href="<?=base_url("iiq")?>">Identity IQ</a>

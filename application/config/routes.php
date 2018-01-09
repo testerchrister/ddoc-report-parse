@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'user';
+$route['home'] = 'user/index';
 $route['login'] = 'user/login';
 $route['logout'] = 'user/logout';
 $route['cct'] = 'creditchecktotal/index';

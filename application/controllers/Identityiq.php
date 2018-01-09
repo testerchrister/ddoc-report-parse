@@ -73,7 +73,7 @@ class Identityiq extends CI_Controller
         if (in_array($file_mime, $allowed_mime_types)) {
             return true;
         } else {
-            $this->form_validation->set_message('file_check', 'Please select only HTML file.');
+            $this->form_validation->set_message('file_check', 'Please upload HTML file only.');
             return false;
         }
     }
