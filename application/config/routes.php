@@ -49,15 +49,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home';
+$route['default_controller'] = 'user';
+$route['login'] = 'user/login';
+$route['logout'] = 'user/logout';
 $route['cct'] = 'creditchecktotal/index';
 $route['ajax_post'] = 'creditchecktotal/ajax_post';
-$route['iiq'] = 'home/identity_iq';
-$route['iiq_init'] = 'home/iiq_init';
-$route['iiq_parser'] = 'home/doc_iiq_post';
-$route['iiq_progress'] = 'home/parse_progress_iiq';
+$route['iiq'] = 'identityiq/identity_iq';
+$route['iiq_init'] = 'identityiq/iiq_init';
+$route['iiq_parser'] = 'identityiq/doc_iiq_post';
+$route['iiq_progress'] = 'identityiq/parse_progress_iiq';
 $route['cct_parser'] = 'creditchecktotal/cct_parser';
 $route['cct_init'] = 'creditchecktotal/cct_init';
-$route['cct_progress'] = 'home/parse_progress';
+$route['cct_progress'] = 'identityiq/parse_progress';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller
+class Identityiq extends CI_Controller
 {
 	private $validation_errors = "";
 	private $status = false;
@@ -9,13 +9,16 @@ class Home extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('report_parser_model');
+        if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+            redirect('login');
+        }
+        $this->load->model('report_parser_model');
 	}
 	public function identity_iq()
 	{
 		$data = array('error' => $this->validation_errors, 'parse_report' => $this->status);
 		$this->load->view('header_tpl');
-		$this->load->view('home_tpl', $data);
+		$this->load->view('identityiq_tpl', $data);
 		$this->load->view('footer_tpl');
 	}
 
